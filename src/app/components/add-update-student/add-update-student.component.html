@@ -1,0 +1,54 @@
+<div style="width: 50%;margin-left: 5%;" >
+   <h3>Add/Update student</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-info" routerLink="/display-students">DisplayStudent</a>
+        </div>
+    </div>
+
+    <form [formGroup]="frm" (ngSubmit)="onPost(val)" #val="ngForm">
+         <input type="hidden" formControlName="id">
+
+         <div class="row">
+            <div class="col-md-4">
+                Name *
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control"  formControlName="name">
+                <div *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)">
+                  <div *ngIf="f['name'].errors?.['required']" class="text-danger">
+                   Name is required
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+                Age *
+            </div>
+            <div class="col-md-8">
+                <input type="number" class="form-control" formControlName="age">
+                <div *ngIf="f['age'].invalid && (f['age'].dirty || f['age'].touched)">
+                    <div *ngIf="f['age'].errors?.['required']" class="text-danger">
+                        Age is required
+                    </div>
+                </div>
+            </div>
+          </div>
+        
+        <div class="row">
+            <div class="col-md-12" *ngIf="status">
+                <span [ngClass]="{'text-danger':status.statusCode==0,'text-success':status.statusCode==1}"> 
+                    {{status.message}}
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-info" [disabled]="frm.invalid" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+
+</div>
